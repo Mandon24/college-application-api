@@ -1,26 +1,27 @@
 package criteria;
 
+import models.Applicant;
+import models.Decision;
+import models.Results;
 import models.State;
 
-public class Age {
-    int age;
-    String state;
+public class Age implements IResults {
 
-    public Age(int age, String state) {
-        this.age = age;
-        this.state = state;
-    }
-
-    public boolean qualifiableAge() {
-        if (this.state.equalsIgnoreCase(State.CALIFORINA.name())) {
-            return (this.age > 17 && this.age < 26) || this.age > 80;
+    @Override
+    public Results getDecision(Applicant applicant) {
+        if (applicant.getAge() < 0) {
+            return new Results(String.format("Applicant has negative age: %d", applicant.getAge()), Decision.REJECT);
+        } else if (applicant.getState().equalsIgnoreCase(State.CALIFORINA.name())) {
+            if ((applicant.getAge() > 17 && applicant.getAge() < 26) || applicant.getAge() > 80) {
+                return new Results("Applicant meets age requirements", Decision.ACCEPT);
+            }
         } else {
-            return this.age > 80;
+            if (applicant.getAge() > 80) {
+                return new Results("Age is above 80", Decision.ACCEPT);
+            }
         }
 
+        return new Results(String.format("Applicant's age criteria needs further review: %d", applicant.getAge()), Decision.REVIEW);
     }
 
-    public boolean hasNegativeAge() {
-        return this.age < 0;
-    }
 }

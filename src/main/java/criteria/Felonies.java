@@ -1,19 +1,16 @@
 package criteria;
 
+import models.Applicant;
 import models.Decision;
 import models.Results;
 
-public class Felonies {
-    int felonies;
+public class Felonies implements IResults {
 
-    public Felonies(int felonies) {
-        this.felonies = felonies;
-    }
-
-    public Results hasFelonies() {
-        if (this.felonies >= 1) {
-            return new Results(String.format("%d felonies found", this.felonies), Decision.REJECT);
+    @Override
+    public Results getDecision(Applicant applicant) {
+        if (applicant.getFelonies() >= 1) {
+            return new Results(String.format("%d felonies found", applicant.getFelonies()), Decision.REJECT);
         }
-        return new Results("", Decision.ACCEPT);
+        return new Results("No felonies found", Decision.ACCEPT);
     }
 }

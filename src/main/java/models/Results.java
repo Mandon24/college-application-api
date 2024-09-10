@@ -6,8 +6,8 @@ public class Results {
     Decision decision;
 
     public Results(String reason, Decision decision) {
-        this.reason = reason;
-        this.decision = decision;
+        setReason(reason);
+        setDecision(decision);
     }
 
     public String getReason() {

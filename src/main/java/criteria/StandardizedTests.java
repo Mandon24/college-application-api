@@ -1,15 +1,15 @@
 package criteria;
 
-public class StandardizedTests {
-    int satScore;
-    int actScore;
+import models.Applicant;
+import models.Decision;
+import models.Results;
 
-    public StandardizedTests(int satScore, int actScore) {
-        this.satScore = satScore;
-        this.actScore = actScore;
-    }
-
-    public boolean qualifiableScores() {
-        return this.satScore > 1920 || this.actScore > 27;
+public class StandardizedTests implements IResults {
+    @Override
+    public Results getDecision(Applicant applicant) {
+        if (applicant.getSatScore() > 1920 || applicant.getActScore() > 27) {
+            return new Results("Applicant sat/act score meets requirements", Decision.ACCEPT);
+        }
+        return new Results("Applicant does not meet sat/act score requirements", Decision.REJECT);
     }
 }

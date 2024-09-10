@@ -7,20 +7,22 @@ import criteria.StandardizedTests;
 import criteria.Name;
 import models.Applicant;
 import models.Decision;
+import models.Results;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ApplicationDecisionEngine {
-    Age applicantAge;
-    GPA applicantGPA;
-    Felonies applicantFelonies;
-    Name applicantName;
-    StandardizedTests applicantScores;
+    Applicant applicant;
+    Age applicantAge = new Age();
+    GPA applicantGPA = new GPA();
+    Felonies applicantFelonies = new Felonies();
+    Name applicantName = new Name();
+    StandardizedTests applicantScores = new StandardizedTests();
+    List<Results> applicantResults = new ArrayList<>();
 
     public ApplicationDecisionEngine(Applicant applicant) {
-        this.applicantAge = new Age(applicant.getAge(), applicant.getState());
-        this.applicantGPA = new GPA(applicant.getGpa(), applicant.getGpaScale());
-        this.applicantFelonies = new Felonies(applicant.getFelonies());
-        this.applicantName = new Name(applicant.getFirstName(), applicant.getLastName());
-        this.applicantScores = new StandardizedTests(applicant.getSatScore(), applicant.getActScore());
+        this.applicant = applicant;
     }
 
     public Decision runDecision() {
@@ -30,10 +32,18 @@ public class ApplicationDecisionEngine {
         }
         // check for Instant Reject
         else if (this.isInstantRejectCriteria()) {
+            System.out.println("Applicant does not meet acceptance requirements: ");
+            for (Results r : this.applicantResults) {
+                System.out.println(r.getReason());
+            }
             return Decision.REJECT;
         }
 
         // check for Further Review
+        System.out.println("Applicant's application needs further review: ");
+        for (Results r : this.applicantResults) {
+            System.out.println(r.getReason());
+        }
         return Decision.REVIEW;
     }
 
@@ -44,11 +54,35 @@ public class ApplicationDecisionEngine {
         - The applicant first and/or last name are not in the form of first letter capitalized, the rest lower case.
      */
     public boolean isInstantRejectCriteria() {
-        return this.applicantFelonies.hasFelonies() && this.applicantGPA.hasBadGPA() && this.applicantAge.hasNegativeAge() && this.applicantName.hasMalformedName();
+        Results felonyResults = this.applicantFelonies.getDecision(this.applicant);
+        Results gpaResults = this.applicantGPA.getDecision(this.applicant);
+        Results ageResults = this.applicantAge.getDecision(this.applicant);
+        Results nameResults = this.applicantName.getDecision(this.applicant);
+        this.applicantResults.add(felonyResults);
+        this.applicantResults.add(gpaResults);
+        this.applicantResults.add(ageResults);
+        this.applicantResults.add(nameResults);
+
+        return felonyResults.getDecision().equals(Decision.REJECT)
+                && gpaResults.getDecision().equals(Decision.REJECT)
+                && ageResults.getDecision().equals(Decision.REJECT)
+                && nameResults.getDecision().equals(Decision.REJECT);
     }
 
     public boolean hasAnyInstantRejectCriteria() {
-        return this.applicantFelonies.hasFelonies() || this.applicantGPA.hasBadGPA() || this.applicantAge.hasNegativeAge() || this.applicantName.hasMalformedName();
+        Results felonyResults = this.applicantFelonies.getDecision(this.applicant);
+        Results gpaResults = this.applicantGPA.getDecision(this.applicant);
+        Results ageResults = this.applicantAge.getDecision(this.applicant);
+        Results nameResults = this.applicantName.getDecision(this.applicant);
+        this.applicantResults.add(felonyResults);
+        this.applicantResults.add(gpaResults);
+        this.applicantResults.add(ageResults);
+        this.applicantResults.add(nameResults);
+
+        return felonyResults.getDecision().equals(Decision.REJECT)
+                || gpaResults.getDecision().equals(Decision.REJECT)
+                || ageResults.getDecision().equals(Decision.REJECT)
+                || nameResults.getDecision().equals(Decision.REJECT);
     }
 
     /*
@@ -58,7 +92,14 @@ public class ApplicationDecisionEngine {
         - No "instant reject" criteria is hit.
      */
     public boolean isInstantAcceptCriteria() {
-        return this.applicantAge.qualifiableAge() && this.applicantScores.qualifiableScores() && this.applicantGPA.hasGoodGPA() && !this.hasAnyInstantRejectCriteria();
+        Results gpaResults = this.applicantGPA.getDecision(this.applicant);
+        Results scoreResults = this.applicantScores.getDecision(this.applicant);
+        Results ageResults = this.applicantAge.getDecision(this.applicant);
+
+        return gpaResults.getDecision().equals(Decision.ACCEPT)
+                && scoreResults.getDecision().equals(Decision.ACCEPT)
+                && ageResults.getDecision().equals(Decision.ACCEPT)
+                && !this.hasAnyInstantRejectCriteria();
 
     }
 

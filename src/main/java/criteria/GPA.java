@@ -1,21 +1,23 @@
 package criteria;
 
-public class GPA {
-    double gpa;
-    double gpaScale;
+import models.Applicant;
+import models.Decision;
+import models.Results;
 
-    public GPA(double gpa, double gpaScale) {
-        this.gpa = gpa;
-        this.gpaScale = gpaScale;
-    }
+public class GPA implements IResults {
+    @Override
+    public Results getDecision(Applicant applicant) {
+        double gpa90Threshold = (90 * applicant.getGpaScale()) / 100;
+        double gpa70Threshold = (70 * applicant.getGpaScale()) / 100;
 
-    public boolean hasGoodGPA() {
-        double gpaThreshold = (90 * this.gpaScale) / 100;
-        return this.gpa >= gpaThreshold;
-    }
+        if (applicant.getGpa() >= gpa90Threshold) {
+            return new Results("Applicant meets good GPA standing requirement", Decision.ACCEPT);
+        } else if (applicant.getGpa() < gpa70Threshold) {
+            return new Results("Applicant does not meet GPA requirements", Decision.REJECT);
+        } else {
+            return new Results("Applicant GPA needs further review", Decision.REVIEW);
+        }
 
-    public boolean hasBadGPA() {
-        double gpaThreshold = (70 * this.gpaScale) / 100;
-        return this.gpa < gpaThreshold;
+
     }
 }
