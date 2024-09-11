@@ -1,6 +1,6 @@
 package models;
 
 public enum State {
-    CALIFORINA,
+    CALIFORNIA,
     OTHER
 }
