@@ -11,7 +11,7 @@ public class Age implements IResults {
     public Results getDecision(Applicant applicant) {
         if (applicant.getAge() < 0) {
             return new Results(String.format("Applicant has negative age: %d", applicant.getAge()), Decision.REJECT);
-        } else if (applicant.getState().equalsIgnoreCase(State.CALIFORINA.name())) {
+        } else if (applicant.getState().equalsIgnoreCase(State.CALIFORNIA.name())) {
             if ((applicant.getAge() > 17 && applicant.getAge() < 26) || applicant.getAge() > 80) {
                 return new Results("Applicant meets age requirements", Decision.ACCEPT);
             }
