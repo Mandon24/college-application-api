@@ -1,8 +1,8 @@
-package criteria;
+package com.mandon.collegeappapi.criteria;
 
-import models.Applicant;
-import models.Decision;
-import models.Results;
+import com.mandon.collegeappapi.models.Applicant;
+import com.mandon.collegeappapi.models.Decision;
+import com.mandon.collegeappapi.models.Results;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

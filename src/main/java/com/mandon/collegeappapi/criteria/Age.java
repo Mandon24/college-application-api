@@ -1,9 +1,9 @@
-package criteria;
+package com.mandon.collegeappapi.criteria;
 
-import models.Applicant;
-import models.Decision;
-import models.Results;
-import models.State;
+import com.mandon.collegeappapi.models.Applicant;
+import com.mandon.collegeappapi.models.Decision;
+import com.mandon.collegeappapi.models.Results;
+import com.mandon.collegeappapi.models.State;
 
 public class Age implements IResults {
 
@@ -21,7 +21,7 @@ public class Age implements IResults {
             }
         }
 
-        return new Results(String.format("Applicant's age criteria needs further review: %d", applicant.getAge()), Decision.REVIEW);
+        return new Results(String.format("Applicant's age com.mandon.collegeappapi.criteria needs further review: %d", applicant.getAge()), Decision.REVIEW);
     }
 
 }

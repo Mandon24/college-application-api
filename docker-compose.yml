@@ -1,0 +1,6 @@
+services:
+  college-app:
+    build: .
+    container_name: college-app-container
+    ports:
+      - "8080:8080"

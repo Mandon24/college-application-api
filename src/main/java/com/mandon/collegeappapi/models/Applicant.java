@@ -1,4 +1,4 @@
-package models;
+package com.mandon.collegeappapi.models;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -98,11 +98,13 @@ public class Applicant {
     }
 
     public void setFelonyDates(List<String> felonyDates) {
-        for (String felonyDate : felonyDates) {
-            // Parse the date string to a LocalDate object
-            LocalDate givenDate = LocalDate.parse(felonyDate);
+        if (felonyDates != null) {
+            for (String felonyDate : felonyDates) {
+                // Parse the date string to a LocalDate object
+                LocalDate givenDate = LocalDate.parse(felonyDate);
 
-            this.felonyDates.add(givenDate);
+                this.felonyDates.add(givenDate);
+            }
         }
 
     }

@@ -1,6 +1,6 @@
-import engine.ApplicationDecisionEngine;
-import models.Applicant;
-import models.Decision;
+import com.mandon.collegeappapi.engine.ApplicationDecisionEngine;
+import com.mandon.collegeappapi.models.Applicant;
+import com.mandon.collegeappapi.models.Decision;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ public class TestAppDecisionEngine {
     @BeforeEach
     public void init() {
         felonyDates = new ArrayList<>();
-        felonyDates.add("2018-10-23");
+        felonyDates.add("2020-10-23");
 
     }
 

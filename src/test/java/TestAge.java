@@ -1,7 +1,7 @@
-import criteria.Age;
-import models.Applicant;
-import models.Decision;
-import models.Results;
+import com.mandon.collegeappapi.criteria.Age;
+import com.mandon.collegeappapi.models.Applicant;
+import com.mandon.collegeappapi.models.Decision;
+import com.mandon.collegeappapi.models.Results;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
