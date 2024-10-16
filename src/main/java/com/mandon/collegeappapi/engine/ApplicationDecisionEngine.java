@@ -103,4 +103,7 @@ public class ApplicationDecisionEngine {
 
     }
 
+    public List<Results> getApplicantResults() {
+        return applicantResults;
+    }
 }

@@ -4,17 +4,19 @@ import com.mandon.collegeappapi.models.Decision;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestAppDecisionEngine {
-    private List<String> felonyDates;
+    private List<LocalDate> felonyDates;
 
     @BeforeEach
     public void init() {
         felonyDates = new ArrayList<>();
-        felonyDates.add("2020-10-23");
+        felonyDates.add(LocalDate.parse("2020-10-23"));
 
     }
 

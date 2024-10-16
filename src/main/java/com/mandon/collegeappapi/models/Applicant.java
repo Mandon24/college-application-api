@@ -1,5 +1,7 @@
 package com.mandon.collegeappapi.models;
 
+import com.mandon.collegeappapi.dto.ApplicantDTO;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,10 +15,10 @@ public class Applicant {
     int satScore;
     int actScore;
     boolean felonies;
-    List<LocalDate> felonyDates = new ArrayList<>();
+    List<LocalDate> felonyDates;
     String state;
 
-    public Applicant(String firstName, String lastName, int age, double gpa, double gpaScale, int satScore, int actScore, boolean felonies, List<String> felonyDates, String state) {
+    public Applicant(String firstName, String lastName, int age, double gpa, double gpaScale, int satScore, int actScore, boolean felonies, List<LocalDate> felonyDates, String state) {
         setFirstName(firstName);
         setLastName(lastName);
         setAge(age);
@@ -97,15 +99,8 @@ public class Applicant {
         return felonyDates;
     }
 
-    public void setFelonyDates(List<String> felonyDates) {
-        if (felonyDates != null) {
-            for (String felonyDate : felonyDates) {
-                // Parse the date string to a LocalDate object
-                LocalDate givenDate = LocalDate.parse(felonyDate);
-
-                this.felonyDates.add(givenDate);
-            }
-        }
+    public void setFelonyDates(List<LocalDate> felonyDates) {
+        this.felonyDates = felonyDates;
 
     }
 
@@ -115,5 +110,21 @@ public class Applicant {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    // Conversion method from ApplicantDTO to Applicant
+    public static Applicant fromDTO(ApplicantDTO dto) {
+        return new Applicant(
+                dto.getFirstName(),
+                dto.getLastName(),
+                dto.getAge(),
+                dto.getGpa(),
+                dto.getGpaScale(),
+                dto.getSatScore(),
+                dto.getActScore(),
+                dto.isFelonies(),
+                dto.getFelonyDates(),
+                dto.getState()
+        );
     }
 }
