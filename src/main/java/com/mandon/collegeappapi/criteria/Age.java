@@ -1,9 +1,9 @@
-package criteria;
+package com.mandon.collegeappapi.criteria;
 
-import models.Applicant;
-import models.Decision;
-import models.Results;
-import models.State;
+import com.mandon.collegeappapi.models.Applicant;
+import com.mandon.collegeappapi.models.Decision;
+import com.mandon.collegeappapi.models.Results;
+import com.mandon.collegeappapi.models.State;
 
 public class Age implements IResults {
 

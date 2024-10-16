@@ -1,13 +1,13 @@
-package engine;
+package com.mandon.collegeappapi.engine;
 
-import criteria.Age;
-import criteria.GPA;
-import criteria.Felonies;
-import criteria.StandardizedTests;
-import criteria.Name;
-import models.Applicant;
-import models.Decision;
-import models.Results;
+import com.mandon.collegeappapi.criteria.Age;
+import com.mandon.collegeappapi.criteria.GPA;
+import com.mandon.collegeappapi.criteria.Felonies;
+import com.mandon.collegeappapi.criteria.StandardizedTests;
+import com.mandon.collegeappapi.criteria.Name;
+import com.mandon.collegeappapi.models.Applicant;
+import com.mandon.collegeappapi.models.Decision;
+import com.mandon.collegeappapi.models.Results;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,7 @@ public class ApplicationDecisionEngine {
 
     /*
         - 1 or more felonies over the past 5 years.
-        - High School criteria. GPA below 70% of scale provided on application.
+        - High School com.mandon.collegeappapi.criteria. GPA below 70% of scale provided on application.
         - The applicant claimed to be a negative age. E.g. "-20" years old.
         - The applicant first and/or last name are not in the form of first letter capitalized, the rest lower case.
      */
@@ -87,9 +87,9 @@ public class ApplicationDecisionEngine {
 
     /*
         - In-state (California) age 17 or older, and younger than 26; or older than 80 from any state.
-        - High School criteria. GPA of 90% or higher of scale provided in their application. E.g. 3.6 on a 4.0 scale or 4.5 on a 5.0 scale.
+        - High School com.mandon.collegeappapi.criteria. GPA of 90% or higher of scale provided in their application. E.g. 3.6 on a 4.0 scale or 4.5 on a 5.0 scale.
         - SAT score greater than 1920 or ACT greater than 27. Note: Both or only one may be present in application.
-        - No "instant reject" criteria is hit.
+        - No "instant reject" com.mandon.collegeappapi.criteria is hit.
      */
     public boolean isInstantAcceptCriteria() {
         Results gpaResults = this.applicantGPA.getDecision(this.applicant);
@@ -103,4 +103,7 @@ public class ApplicationDecisionEngine {
 
     }
 
+    public List<Results> getApplicantResults() {
+        return applicantResults;
+    }
 }

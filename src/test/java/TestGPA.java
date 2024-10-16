@@ -1,21 +1,22 @@
-import criteria.GPA;
-import models.Applicant;
-import models.Decision;
-import models.Results;
+import com.mandon.collegeappapi.criteria.GPA;
+import com.mandon.collegeappapi.models.Applicant;
+import com.mandon.collegeappapi.models.Decision;
+import com.mandon.collegeappapi.models.Results;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TestGPA {
-    private List<String> felonyDates;
+    private List<LocalDate> felonyDates;
 
     @BeforeEach
     public void init() {
         felonyDates = new ArrayList<>();
-        felonyDates.add("2018-10-23");
+        felonyDates.add(LocalDate.parse("2018-10-23"));
 
     }
 
