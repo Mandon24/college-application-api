@@ -19,8 +19,7 @@ public class ApplicantDTO {
 
     @NotBlank(message = "Last name is required")
     private String lastName;
-
-    @Min(value = 0, message = "Age must be a positive integer")
+    
     @Max(value = 130, message = "Age must be less than 130")
     private int age;
 
@@ -42,7 +41,7 @@ public class ApplicantDTO {
 
     @ValidBoolean
     private boolean felonies;
-    
+
     private List<LocalDate> felonyDates;
 
     @NotBlank(message = "State is required")

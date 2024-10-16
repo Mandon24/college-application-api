@@ -21,7 +21,7 @@ public class Age implements IResults {
             }
         }
 
-        return new Results(String.format("Applicant's age com.mandon.collegeappapi.criteria needs further review: %d", applicant.getAge()), Decision.REVIEW);
+        return new Results(String.format("Applicant's age criteria needs further review: %d", applicant.getAge()), Decision.REVIEW);
     }
 
 }
